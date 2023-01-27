@@ -38,11 +38,11 @@ class TrackView(View):
             if not any(list(map(lambda host: host in relation.webhook_url, settings.ALLOWED_HOSTS))): 
                 response = http_get(relation.webhook_url, json={
                     'email': request.GET[f'{custom_code}_email']
-                })
+                }).status_code
             else:
                 response = 500
 
-            record = ClickRecord(alias=_alias, url_for_redirect=_url_for_redirect, email=_email, status_code=response.status_code, 
+            record = ClickRecord(alias=_alias, url_for_redirect=_url_for_redirect, email=_email, status_code=response, 
                 email_number=request.GET.get(f'{custom_code}_email_number', 1), email_type=request.GET.get(f'{custom_code}_email_type', 'A'))
             record.save()
 
