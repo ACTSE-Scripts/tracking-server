@@ -18,4 +18,4 @@ class ClickRecord(models.Model):
 	email_type = models.CharField('Email type in Sequence', default='A', max_length=3, help_text='A/B Test')
 
 	def __str__(self):
-		return f'{self.alias} - {self.email} - {self.email_number}/{self.email_type}'
+		return f'{self.alias} - {self.email} - {self.email_number}/{self.email_type} - {self.status_code}'
