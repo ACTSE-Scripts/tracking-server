@@ -17,7 +17,7 @@
 
 	<button id="button">Copy URL</button>
 	<script type="text/javascript">
-		function copyText() {
+		function copyText(e) {
 			let Alias = document.getElementById("Alias");
 			let Url = document.getElementById("Url");
 			let Email = document.getElementById("Email");
@@ -29,27 +29,27 @@
 			let utm_medium = document.getElementById("utm_medium");
 			let utm_campaign = document.getElementById("utm_campaign");
 
-			let url = window.location.href + Alias.value + '/?e_url=' + Url.value + '&e_email=' + Email.value
+			let url = window.location.href + Alias.value + '/?e_url=' + Url.value + '&e_email=' + Email.value;
 			if (EmailNumber.value != ''){
-				url = url + '&e_email_number=' + EmailNumber.value
+				url = url + '&e_email_number=' + EmailNumber.value;
 			}
 			if (EmailNumber.value != ''){
-				url = url + '&e_email_type=' + EmailType.value
+				url = url + '&e_email_type=' + EmailType.value;
 			}
 
 			if (utm_source.value != ''){
-				url = url + '&utm_source=' + utm_source.value
+				url = url + '&utm_source=' + utm_source.value;
 			}
 			if (utm_medium.value != ''){
-				url = url + '&utm_medium=' + utm_medium.value
+				url = url + '&utm_medium=' + utm_medium.value;
 			}
 			if (utm_campaign.value != ''){
-				url = url + '&utm_campaign=' + utm_campaign.value
+				url = url + '&utm_campaign=' + utm_campaign.value;
 			}
-			copyText.select();
-			copyText.setSelectionRange(0, 99999);
 			navigator.clipboard.writeText(url);
 		}
+		let button = document.getElementById("button");
+		button.addEventListener('click', copyText)
 	</script>
 </body>
 </html>
