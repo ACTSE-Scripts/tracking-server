@@ -20,8 +20,6 @@ class TrackView(View):
         _email = request.GET[f'{custom_code}_email']
         relation = get_object_or_404(Relation, alias=_alias)
 
-        # relation.track_all_clicks if False
-        # Трекает каждую ссылку с каждого письма по 1 разу, до тех пор пока трек не сочтется успешным
         if relation.unique_click_by_link:
             additional_filter = {}
         else:
@@ -37,9 +35,12 @@ class TrackView(View):
             if clicks == 0:
                 _track = True
         if _track:
-            response = http_get(relation.webhook_url, json={
-                'email': request.GET[f'{custom_code}_email']
-            })
+            if not any(list(map(lambda host: host in relation.webhook_url, settings.ALLOWED_HOSTS))): 
+                response = http_get(relation.webhook_url, json={
+                    'email': request.GET[f'{custom_code}_email']
+                })
+            else:
+                response = 500
 
             record = ClickRecord(alias=_alias, url_for_redirect=_url_for_redirect, email=_email, status_code=response.status_code, 
                 email_number=request.GET.get(f'{custom_code}_email_number', 1), email_type=request.GET.get(f'{custom_code}_email_type', 'A'))
