@@ -15,7 +15,7 @@ class TrackView(View):
         custom_code = settings.CUSTOM_CODE
         if f'{custom_code}_url' not in request.GET.keys() or f'{custom_code}_email' not in request.GET.keys():
             raise Http404()
-        _alias = args[0]
+        _alias = kwargs.get('alias', 'test')
         _url_for_redirect = request.GET[f'{custom_code}_url']
         _email = request.GET[f'{custom_code}_email']
         relation = get_object_or_404(Relation, alias=_alias)
