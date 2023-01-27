@@ -1,14 +1,12 @@
 from requests import get as http_get
 from django.views import View
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponsePermanentRedirect, Http404, HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from linktrack.models import Relation, ClickRecord
 from django.conf import settings
 
-# http://137.184.15.57:443/api/track/?e_url=https://google.com&e_alias=Test&e_email=igor.teplov@actse.ltd&e_email_number=2&e_email_type=B&utm_source=email
-# http://127.0.0.1:8000/api/track/?e_url=http://127.0.0.1:8000/api/webhook&e_alias=Test&e_email=igor.teplov@actse.ltd&e_email_number=2&e_email_type=B&utm_source=email
 @method_decorator([never_cache], name='dispatch')
 class TrackView(View):
     def get(self, request, *args, **kwargs):
@@ -65,4 +63,4 @@ class TrackWebhook(View):
 
 class UrlBuilder(View):
     def get(self, request, *args, **kwargs):
-        return HttpResponse('Ok')
+        return render(request, 'index.html')
