@@ -7,6 +7,7 @@
 	<style type="text/css">
 		body {
 			margin: 0;
+			font-family: Arial;
 		}
 		.container {
 			position: relative;
@@ -56,6 +57,13 @@
 		.container .wrapper button:hover {
 			cursor: pointer;
 		}
+		.container .wrapper span {
+			display: block;
+			align-self: center;
+			height: 20px;
+			font-size: 20px;
+			color: black;
+		}
 	</style>
 </head>
 <body>
@@ -71,6 +79,7 @@
 			<input type="text" id="utm_campaign" placeholder="utm_campaign">
 
 			<button id="button">Copy URL</button>
+			<span id="action"></span>
 		</div>
 	</div>
 	
@@ -86,6 +95,7 @@
 			let utm_source = document.getElementById("utm_source");
 			let utm_medium = document.getElementById("utm_medium");
 			let utm_campaign = document.getElementById("utm_campaign");
+			let action = document.getElementById("action");
 
 			let url = window.location.href + Alias.value + '/?e_url=' + Url.value + '&e_email=' + Email.value;
 			if (EmailNumber.value != ''){
@@ -105,6 +115,10 @@
 				url = url + '&utm_campaign=' + utm_campaign.value;
 			}
 			navigator.clipboard.writeText(url);
+			action.innerText = 'Copied!'
+			setTimeout(()=>{
+				action.innerText = ''
+			}, 1500)
 		}
 		let button = document.getElementById("button");
 		button.addEventListener('click', copyText)
