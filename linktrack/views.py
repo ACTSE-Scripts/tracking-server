@@ -63,8 +63,6 @@ class TrackWebhook(View):
         return HttpResponse('Ok')
 
 @method_decorator([never_cache], name='dispatch')
-
-
 class UrlBuilder(LoginRequiredMixin, View):
     login_url = '/admin/login/?next=/'
     redirect_field_name = 'next'

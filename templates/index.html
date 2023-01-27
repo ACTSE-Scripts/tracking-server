@@ -4,18 +4,74 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Url Builder</title>
+	<style type="text/css">
+		body {
+			margin: 0;
+		}
+		.container {
+			position: relative;
+			width: 100%;
+			height: 100vh;
+		}
+		.container .wrapper {
+			position: absolute;
+			background-color: #e4eaf5;
+			top: 50%;
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+			max-width: 600px;
+			padding: 80px;
+			border: 1px solid black;
+			border-radius: 15px;
+			display: flex;
+			flex-direction: column;
+		}
+		.container .wrapper input {
+			background-color: #e4eaf5;
+			height: 35px;
+			width: 250px;
+			margin: 10px 0px;
+			font-size: 18px;
+			border: 0px solid black;
+			border-bottom: 2px solid grey;
+			outline: None;
+		}
+		.container .wrapper input:focus {
+			border-bottom: 2px solid black;
+		}
+		.container .wrapper input:focus::placeholder {
+			color: black;
+		}
+		.container .wrapper button {
+			align-self: center ;
+			height: 35px;
+			width: 250px;
+			margin: 10px 0px;
+			font-size: 18px;
+			outline: None;
+			border: 0px solid black;
+			border-radius: 8px;
+			background-color: #4287f5;
+
+		}
+	</style>
 </head>
 <body>
-	<input type="text" id="Alias" placeholder="Alias">
-	<input type="text" id="Url" placeholder="Url">
-	<input type="text" id="Email" placeholder="Email">
-	<input type="text" id="EmailNumber" placeholder="Email Number">
-	<input type="text" id="EmailType" placeholder="Email Type">
-	<input type="text" id="utm_source" placeholder="utm_source">
-	<input type="text" id="utm_medium" placeholder="utm_medium">
-	<input type="text" id="utm_campaign" placeholder="utm_campaign">
+	<div class="container">
+		<div class="wrapper">
+			<input type="text" id="Alias" placeholder="Alias">
+			<input type="text" id="Url" placeholder="Url">
+			<input type="text" id="Email" placeholder="Email">
+			<input type="text" id="EmailNumber" placeholder="Email Number">
+			<input type="text" id="EmailType" placeholder="Email Type">
+			<input type="text" id="utm_source" placeholder="utm_source">
+			<input type="text" id="utm_medium" placeholder="utm_medium">
+			<input type="text" id="utm_campaign" placeholder="utm_campaign">
 
-	<button id="button">Copy URL</button>
+			<button id="button">Copy URL</button>
+		</div>
+	</div>
+	
 	<script type="text/javascript">
 		function copyText(e) {
 			let Alias = document.getElementById("Alias");
