@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponsePermanentRedirect, Http404, HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
+from django.contrib.auth.decorators import login_required
 from linktrack.models import Relation, ClickRecord
 from django.conf import settings
 
@@ -61,6 +62,7 @@ class TrackWebhook(View):
     def get(self, request, *args, **kwargs):
         return HttpResponse('Ok')
 
+@method_decorator([never_cache, login_required], name='dispatch')
 class UrlBuilder(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'index.html')
