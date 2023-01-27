@@ -10,9 +10,9 @@ class Relation(models.Model):
 		return f'{self.alias} - {self.webhook_url}'
 
 class ClickRecord(models.Model):
-	alias = models.CharField('Alias', max_length=128, default='')
-	url_for_redirect = models.CharField('Url for Redirect', max_length=512, default='')
-	email = models.CharField('Email', max_length=128, default='')
+	alias = models.CharField('Alias', max_length=128, default='', db_index=True)
+	url_for_redirect = models.CharField('Url for Redirect', max_length=512, default='', db_index=True)
+	email = models.CharField('Email', max_length=128, default='', db_index=True)
 	status_code = models.IntegerField('Status Code', default=200)
 	email_number = models.IntegerField('Email Number in Sequence', default=1)
 	email_type = models.CharField('Email type in Sequence', default='A', max_length=3, help_text='A/B Test')
