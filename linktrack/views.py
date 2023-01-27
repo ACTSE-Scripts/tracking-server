@@ -61,25 +61,3 @@ class TrackView(View):
 class TrackWebhook(View):
     def get(self, request, *args, **kwargs):
         return HttpResponse('Ok')
-
-
-
-# http://137.184.15.57:443/api/track/
-    ?
-    e_url=https://google.com&
-    
-    e_email=igor.teplov@actse.ltd&
-    e_email_number=2&
-    e_email_type=B&
-    https://google.com/?utm_source=email&utm_campaing=asfe
-
-
-http://137.184.15.57:443/api/track/?
-    e_url=https://www.laugh.events/&
-    e_alias=laughevents&
-    e_email=igor.teplov@actse.ltd&
-    e_email_number=2&
-    e_email_type=B&
-    utm_source=outbound&
-    utm_medium=emailing&
-    utm_campaign=remote_50_5000_1
