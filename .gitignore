@@ -2,3 +2,4 @@ __pycache__
 prod
 .env
 db.sqlite3
+static
