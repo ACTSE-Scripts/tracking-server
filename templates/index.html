@@ -27,17 +27,17 @@
 			display: flex;
 			flex-direction: column;
 		}
-		.container .wrapper input {
+		.container .wrapper input, .container .wrapper select{
 			background-color: #e4eaf5;
 			height: 35px;
-			width: 250px;
+			width: 330px;
 			margin: 10px 0px;
 			font-size: 18px;
 			border: 0px solid black;
 			border-bottom: 2px solid grey;
 			outline: None;
 		}
-		.container .wrapper input:focus {
+		.container .wrapper input:focus, .container .wrapper select:focus {
 			border-bottom: 2px solid black;
 		}
 		.container .wrapper input:focus::placeholder {
@@ -46,7 +46,7 @@
 		.container .wrapper button {
 			align-self: center ;
 			height: 35px;
-			width: 250px;
+			width: 330px;
 			margin: 10px 0px;
 			font-size: 18px;
 			outline: None;
@@ -70,7 +70,12 @@
 <body>
 	<div class="container">
 		<div class="wrapper">
-			<input type="text" id="Alias" placeholder="Alias">
+			<select id="Alias">
+				<option value="">--Please choose an option--</option>
+				{% for alias in alias %}
+					<option value="{{alias.0}}">{{alias.0}}</option>
+				{% endfor %}
+			</select>
 			<input type="text" id="Url" placeholder="Url">
 			<input type="text" id="Email" placeholder="Email" value="">
 			<input type="text" id="EmailNumber" placeholder="Email Number">
@@ -117,8 +122,16 @@
 		function copyText(e) {
 			let url = updateValue();
 			let action = document.getElementById("action");
-			navigator.clipboard.writeText(url);
-			action.innerText = 'Copied!'
+			
+			let Alias = document.getElementById("Alias");
+			let Url = document.getElementById("Url");
+			let Email = document.getElementById("Email");
+			if(Alias.value === '' || Url.value === '' || Email.value === '' ){
+				action.innerText = 'Alias, URL and email must be filled!'
+			}else{
+				navigator.clipboard.writeText(url);
+				action.innerText = 'Copied!'
+			}
 			setTimeout(()=>{
 				action.innerText = ''
 			}, 1500)

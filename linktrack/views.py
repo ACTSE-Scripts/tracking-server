@@ -67,4 +67,4 @@ class UrlBuilder(LoginRequiredMixin, View):
     login_url = '/admin/login/?next=/'
     redirect_field_name = 'next'
     def get(self, request, *args, **kwargs):
-        return render(request, 'index.html')
+        return render(request, 'index.html', {'alias': Relation.objects.only('alias').values_list('alias')})
