@@ -63,6 +63,7 @@
 			height: 20px;
 			font-size: 20px;
 			color: black;
+			word-wrap: break-word;
 		}
 	</style>
 </head>
@@ -71,11 +72,11 @@
 		<div class="wrapper">
 			<input type="text" id="Alias" placeholder="Alias">
 			<input type="text" id="Url" placeholder="Url">
-			<input type="text" id="Email" placeholder="Email">
+			<input type="text" id="Email" placeholder="Email" value="">
 			<input type="text" id="EmailNumber" placeholder="Email Number">
-			<input type="text" id="EmailType" placeholder="Email Type">
-			<input type="text" id="utm_source" placeholder="utm_source">
-			<input type="text" id="utm_medium" placeholder="utm_medium">
+			<input type="text" id="EmailType" placeholder="Email Type" value="A">
+			<input type="text" id="utm_source" placeholder="utm_source" value="outbound">
+			<input type="text" id="utm_medium" placeholder="utm_medium" value="emailing">
 			<input type="text" id="utm_campaign" placeholder="utm_campaign">
 
 			<button id="button">Copy URL</button>
@@ -84,7 +85,7 @@
 	</div>
 	
 	<script type="text/javascript">
-		function copyText(e) {
+		function updateValue(){
 			let Alias = document.getElementById("Alias");
 			let Url = document.getElementById("Url");
 			let Email = document.getElementById("Email");
@@ -95,8 +96,6 @@
 			let utm_source = document.getElementById("utm_source");
 			let utm_medium = document.getElementById("utm_medium");
 			let utm_campaign = document.getElementById("utm_campaign");
-			let action = document.getElementById("action");
-
 			let url = window.location.href + Alias.value + '/?e_url=' + Url.value + '&e_email=' + Email.value;
 			if (EmailNumber.value != ''){
 				url = url + '&e_email_number=' + EmailNumber.value;
@@ -104,7 +103,6 @@
 			if (EmailNumber.value != ''){
 				url = url + '&e_email_type=' + EmailType.value;
 			}
-
 			if (utm_source.value != ''){
 				url = url + '&utm_source=' + utm_source.value;
 			}
@@ -114,14 +112,20 @@
 			if (utm_campaign.value != ''){
 				url = url + '&utm_campaign=' + utm_campaign.value;
 			}
+			return url
+		}
+		function copyText(e) {
+			let url = updateValue();
+			let action = document.getElementById("action");
 			navigator.clipboard.writeText(url);
 			action.innerText = 'Copied!'
 			setTimeout(()=>{
 				action.innerText = ''
 			}, 1500)
 		}
-		let button = document.getElementById("button");
-		button.addEventListener('click', copyText)
+
+		document.getElementById("button").addEventListener('click', copyText);
+		document.getElementById("Email").value = "\{\{"+"email"+"\}\}";
 	</script>
 
 </body>
